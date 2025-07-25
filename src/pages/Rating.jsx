@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Navbar from "../components/Navbar";
 import bajuImg from "../assets/baju.png";
 import heroImg from "../assets/forest.jpeg";
 
@@ -187,7 +186,6 @@ export default function Rating() {
 
   return (
     <div style={{ width: "100vw", minHeight: "100vh", background: "#f7f7f7" }}>
-      <Navbar />
       
       {/* Hero Section */}
       <div style={{

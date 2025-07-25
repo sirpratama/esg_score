@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
 import "./Dashboard.css";
 import heroImg from "../assets/hero.png";
 import { supabase } from "../../supabaseClient";
@@ -19,7 +18,6 @@ export default function Dashboard() {
 
   return (
     <div>
-      <Navbar session={session} />
       <div className="dashboard-hero" style={{ backgroundImage: `url(${heroImg})` }}>
         <div className="dashboard-overlay">
           <div className="dashboard-content">
