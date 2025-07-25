@@ -5,6 +5,7 @@ import Services from './pages/Services'
 import About from './pages/About'
 import Rating from './pages/Rating'
 import Register from './pages/Register'
+import Contact from './pages/Contact'
 import './App.css'
 import { supabase } from '../supabaseClient'
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/rating" element={<Rating />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </Router>
   )
