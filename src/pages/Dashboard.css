@@ -24,7 +24,7 @@ html, body, #root {
 .dashboard-overlay {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(255,255,255,0.7);
+  background: rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -32,9 +32,11 @@ html, body, #root {
   width: 100%;
   z-index: 1;
 }
+
 .dashboard-content {
-  margin-left: 3rem;
+  margin-left: 4rem;
   z-index: 2;
+  max-width: 600px;
 }
 
 /* Ensure Navbar stays above hero image */
@@ -43,28 +45,104 @@ html, body, #root {
   z-index: 10;
 }
 
-.esg-title {
-  font-size: 3rem;
-  font-style: italic;
-  font-weight: bold;
-  color: #142807;
+/* New Hero Headline Styling */
+.hero-headline {
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  margin-bottom: 2rem;
 }
-.esg-bold {
-  font-size: 3.5rem;
+
+.headline-main {
+  font-size: 4.5rem;
   font-weight: bold;
   font-style: italic;
+  color: #fff;
+  line-height: 0.9;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
-.esg-ku {
-  font-size: 1.5rem;
-  color: #bdbd00;
-  margin-left: 0.3rem;
-  font-style: italic;
-}
-.esg-subtitle {
-  margin-top: 1.5rem;
-  font-size: 1.3rem;
+
+.headline-sub {
+  font-size: 3rem;
   font-weight: 600;
-  color: #222;
+  font-style: italic;
+  color: #bdbd00;
+  margin-top: 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-tagline {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 3rem;
+  line-height: 1.5;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.hero-cta {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.cta-button {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.cta-button.primary {
+  background: #23401a;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(35, 64, 26, 0.3);
+}
+
+.cta-button.primary:hover {
+  background: #1c3415;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(35, 64, 26, 0.4);
+}
+
+.cta-button.secondary {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+}
+
+.cta-button.secondary:hover {
+  background: #fff;
+  color: #23401a;
+  transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard-content {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+  
+  .headline-main {
+    font-size: 3rem;
+  }
+  
+  .headline-sub {
+    font-size: 2rem;
+  }
+  
+  .hero-tagline {
+    font-size: 1.2rem;
+  }
+  
+  .hero-cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }

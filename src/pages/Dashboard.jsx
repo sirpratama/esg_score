@@ -23,12 +23,16 @@ export default function Dashboard() {
       <div className="dashboard-hero" style={{ backgroundImage: `url(${heroImg})` }}>
         <div className="dashboard-overlay">
           <div className="dashboard-content">
-            <div className="esg-title">
-              <span className="esg-bold">ESG</span>
-              <span className="esg-ku">ku</span>
+            <div className="hero-headline">
+              <span className="headline-main">Sustainability</span>
+              <span className="headline-sub">Made Simple</span>
             </div>
-            <div className="esg-subtitle">
-              Helping UMKM’s reach their goal
+            <div className="hero-tagline">
+              Empowering UMKM businesses to achieve their ESG goals with intelligent scoring and actionable insights
+            </div>
+            <div className="hero-cta">
+              <button className="cta-button primary">Get Your ESG Score</button>
+              <button className="cta-button secondary">Learn More</button>
             </div>
           </div>
         </div>

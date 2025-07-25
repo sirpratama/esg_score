@@ -10,7 +10,14 @@ export default function Navbar({ session }) {
 
   return (
     <nav className="navbar">
-      <div className="navbar-title">Dashboard</div>
+      <div className="navbar-logo">
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <div className="esg-logo">
+            <span className="esg-bold">ESG</span>
+            <span className="esg-ku">ku</span>
+          </div>
+        </Link>
+      </div>
       <div className="navbar-links">
         <Link to="/">HOME</Link>
         <Link to="/about" className="italic">ABOUT</Link>
