@@ -56,9 +56,16 @@ export default function Navbar({ session }) {
             </div>
             {dropdownOpen && (
               <div className="profile-dropdown">
+                <div className="profile-avatar-large">
+                  <svg height="40" width="40" viewBox="0 0 36 36" fill="none">
+                    <circle cx="18" cy="18" r="18" fill="#bdbd00" />
+                    <circle cx="18" cy="14" r="7" fill="#23401a" />
+                    <ellipse cx="18" cy="27" rx="10" ry="6" fill="#23401a" />
+                  </svg>
+                </div>
                 <div className="profile-info">
                   <div className="profile-business"><b>Business name</b></div>
-                  <div className="profile-email">Email: {session.user.email}</div>
+                  <div className="profile-email">{session.user.email}</div>
                 </div>
                 <div className="profile-actions">
                   <Link to="/profile" className="profile-action">Edit Profile</Link>

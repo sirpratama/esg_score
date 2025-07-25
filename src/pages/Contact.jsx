@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Navbar from "../components/Navbar";
 import heroImg from "../assets/forest.jpeg";
 
 const contactMethods = [
@@ -71,7 +70,6 @@ export default function Contact() {
 
   return (
     <div style={{ width: '100vw', minHeight: '100vh', background: '#f7f7f7' }}>
-      <Navbar />
       
       {/* Hero Section */}
       <div style={{

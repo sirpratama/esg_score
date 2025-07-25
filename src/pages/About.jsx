@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../components/Navbar";
 import heroImg from "../assets/forest.jpeg";
 import { Link } from "react-router-dom";
 
@@ -50,7 +49,6 @@ const values = [
 export default function About() {
   return (
     <div style={{ width: '100vw', minHeight: '100vh', background: '#f7f7f7' }}>
-      <Navbar />
       
       {/* Hero Section */}
       <div style={{
