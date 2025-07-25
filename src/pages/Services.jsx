@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import heroImg from "../assets/forest.jpeg";
+import { Link } from "react-router-dom";
 
 const services = [
   {
@@ -13,7 +14,7 @@ const services = [
       "Improvement recommendations"
     ],
     icon: "📊",
-    buttonText: "Get Your Rating"
+    buttonText: <Link to="/report">Get Your Rating</Link>
   },
   {
     title: "UMKM Marketplace",
@@ -297,21 +298,7 @@ export default function Services() {
             justifyContent: 'center',
             flexWrap: 'wrap'
           }}>
-            <button style={{
-              background: '#fff',
-              color: '#23401a',
-              border: 'none',
-              borderRadius: '12px',
-              padding: '1rem 2rem',
-              fontSize: '1.1rem',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              transition: 'transform 0.3s ease'
-            }}
-            onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
-            onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}>
-              Get Started Now
-            </button>
+            <Link to="/report" className="cta-button primary">Get Started Now</Link>
             <button style={{
               background: 'transparent',
               color: '#fff',

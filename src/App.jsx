@@ -6,8 +6,12 @@ import About from './pages/About'
 import Rating from './pages/Rating'
 import Register from './pages/Register'
 import Contact from './pages/Contact'
+import Profile from './pages/Profile';
+import ReportForm  from './pages/ReportForm'
+
 import './App.css'
 import { supabase } from '../supabaseClient'
+import { Import } from 'lucide-react'
 
 function App() {
   return (
@@ -20,6 +24,8 @@ function App() {
         <Route path="/rating" element={<Rating />} />
         <Route path="/register" element={<Register />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path ="/profile" element= {<Profile/>} /> 
+        <Route path = "/report" element = {<ReportForm/>} />
       </Routes>
     </Router>
   )

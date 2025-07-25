@@ -80,9 +80,8 @@ export default function Login() {
         <div className="w-full max-w-md space-y-8">
           {/* Logo/Brand */}
           <div className="text-center">
-            <div className="flex items-center justify-center space-x-2 mb-4">
-              <Leaf className="h-8 w-8 text-green-600" />
-              <span className="text-2xl font-bold text-gray-900">ESGku</span>
+            <div className="flex items-center justify-center mb-4">
+              <img src="src/assets/logo2.png" alt="ESGku Logo" className="h-16" />
             </div>
             <h1 className="text-3xl font-bold text-gray-900">Welcome Back!</h1>
             <p className="text-gray-600 mt-2">

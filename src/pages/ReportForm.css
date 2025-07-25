@@ -1,0 +1,472 @@
+/* Report Form Modern Wide Layout */
+.reportform-bg {
+  min-height: 100vh;
+  background: #f7f7f7;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem 0;
+}
+.reportform-container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  background: none;
+  gap: 2.5rem;
+}
+/* Card layout for the main form */
+.reportform-card {
+  background: #fff;
+  border-radius: 32px;
+  box-shadow: 0 8px 32px rgba(35,64,26,0.13);
+  padding: 2.5rem 2.5rem;
+  max-width: 1300px;
+  margin: 2.5rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  animation: fadeInCard 0.7s;
+}
+@keyframes fadeInCard {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Sidebar Stepper Improvements */
+.reportform-sidebar {
+  background: #23401a;
+  color: #fff;
+  border-radius: 28px;
+  padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+  min-width: 340px;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0 4px 24px rgba(35,64,26,0.08);
+  border: 2.5px solid #bdbdff00;
+  outline: 2.5px solid #bdbdff;
+  outline-offset: -2.5px;
+}
+.reportform-sidebar h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 2.5rem;
+}
+.reportform-stepper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.stepper-step {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 1.2rem;
+  transition: background 0.2s;
+}
+.stepper-step.active {
+  background: rgba(255,255,255,0.07);
+  border-radius: 12px;
+}
+.stepper-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  background: #23401a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  transition: border 0.2s, background 0.2s, color 0.2s;
+}
+.stepper-circle.active {
+  background: #fff;
+  border: 3px solid #bdbd00;
+  color: #23401a;
+}
+.stepper-label {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+  transition: color 0.2s;
+}
+.stepper-label.active {
+  color: #bdbd00;
+}
+.stepper-line {
+  position: absolute;
+  left: 19px;
+  top: 38px;
+  width: 2px;
+  height: 38px;
+  background: #fff;
+  z-index: 0;
+}
+
+/* Section Titles and Dividers */
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #23401a;
+  margin: 1.5rem 0 0.7rem 0;
+  letter-spacing: 0.5px;
+  border-left: 4px solid #bdbd00;
+  padding-left: 0.7rem;
+  background: linear-gradient(90deg, #fff 80%, #bdbd00 100%);
+  border-radius: 6px;
+}
+
+/* Floating Label Inputs */
+.floating-label-group {
+  position: relative;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+.floating-label-group.wide {
+  flex: 2;
+}
+.reportform-input {
+  width: 100%;
+  border: 1.5px solid #23401a;
+  border-radius: 12px;
+  padding: 1.1rem 1.1rem 0.7rem 1.1rem;
+  font-size: 1.08rem;
+  font-weight: 500;
+  outline: none;
+  background: #f9f9f9;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+.reportform-input:focus {
+  border: 1.5px solid #bdbd00;
+  box-shadow: 0 2px 8px rgba(189,189,0,0.08);
+}
+.floating-label-group label {
+  position: absolute;
+  left: 1.2rem;
+  top: 1.1rem;
+  color: #7a7a7a;
+  font-size: 1.08rem;
+  font-weight: 500;
+  pointer-events: none;
+  background: transparent;
+  transition: 0.18s cubic-bezier(0.4,0,0.2,1);
+}
+.floating-label-group input:focus + label,
+.floating-label-group input:not(:placeholder-shown) + label {
+  top: -0.7rem;
+  left: 1rem;
+  font-size: 0.92rem;
+  color: #23401a;
+  background: #fff;
+  padding: 0 0.3rem;
+  border-radius: 6px;
+}
+
+/* Main Form Area */
+.reportform-main {
+  flex: 1;
+  padding: 2.5rem 0 2.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.reportform-steps-anim {
+  width: 100%;
+  animation: fadeInStep 0.5s;
+}
+@keyframes fadeInStep {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.reportform-fields {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.reportform-row {
+  display: flex;
+  gap: 1.2rem;
+  width: 100%;
+}
+.reportform-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.reportform-field.wide {
+  flex: 2;
+}
+.reportform-field label {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #23401a;
+  margin-bottom: 0.2rem;
+}
+.reportform-field input[type="text"],
+.reportform-field input[type="file"] {
+  border: 1.5px solid #23401a;
+  border-radius: 12px;
+  padding: 0.7rem 1.2rem;
+  font-size: 1.08rem;
+  font-weight: 400;
+  outline: none;
+  background: #fff;
+  transition: border 0.2s;
+}
+.reportform-field input[type="text"]:focus {
+  border: 1.5px solid #bdbd00;
+}
+.reportform-actions {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+}
+.reportform-next, .reportform-back {
+  background: linear-gradient(90deg, #23401a 60%, #bdbd00 100%);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 0.8rem 2.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(35,64,26,0.08);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.reportform-next:hover, .reportform-back:hover {
+  background: linear-gradient(90deg, #bdbd00 60%, #23401a 100%);
+  color: #23401a;
+}
+.reportform-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  width: 100%;
+  background: #f7fff7;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(35,64,26,0.08);
+  padding: 3rem 2rem;
+  animation: fadeInSuccess 0.5s;
+}
+.reportform-success-card {
+  min-height: 420px;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #e6f2e6 60%, #b6e388 100%);
+  border-radius: 28px;
+  box-shadow: 0 8px 32px rgba(35,64,26,0.13);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5rem 2rem 2.5rem 2rem;
+  position: relative;
+  animation: fadeInSuccess 0.5s;
+}
+.success-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #b6e388 60%, #23401a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 16px rgba(35,64,26,0.10);
+  animation: popIn 0.6s;
+}
+.success-icon {
+  font-size: 3.2rem;
+  color: #fff;
+  font-weight: 800;
+  text-shadow: 0 2px 8px rgba(35,64,26,0.13);
+}
+.success-title {
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: #23401a;
+  margin-bottom: 0.3rem;
+  text-align: center;
+  letter-spacing: 1px;
+}
+.success-subtitle {
+  color: #23401a;
+  font-size: 1.18rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  opacity: 0.92;
+}
+.success-btn {
+  background: linear-gradient(90deg, #23401a 60%, #bdbd00 100%);
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 0.9rem 2.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(35,64,26,0.08);
+  transition: background 0.2s, box-shadow 0.2s;
+  margin-top: 0.5rem;
+}
+.success-btn:hover {
+  background: linear-gradient(90deg, #bdbd00 60%, #23401a 100%);
+  color: #23401a;
+}
+.confetti {
+  position: absolute;
+  top: 0.5rem;
+  left: 0;
+  width: 100%;
+  height: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+.confetti-piece {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  opacity: 0.7;
+  animation: confetti-fall 1.2s linear infinite;
+}
+.confetti-piece:nth-child(1) {
+  background: #ffe066;
+  left: 20%;
+  animation-delay: 0s;
+}
+.confetti-piece:nth-child(2) {
+  background: #b6e388;
+  left: 40%;
+  animation-delay: 0.2s;
+}
+.confetti-piece:nth-child(3) {
+  background: #23401a;
+  left: 60%;
+  animation-delay: 0.4s;
+}
+.confetti-piece:nth-child(4) {
+  background: #bdbd00;
+  left: 70%;
+  animation-delay: 0.1s;
+}
+.confetti-piece:nth-child(5) {
+  background: #fff;
+  left: 85%;
+  animation-delay: 0.3s;
+}
+@keyframes confetti-fall {
+  0% { top: 0; transform: rotate(0deg) scale(1); }
+  80% { opacity: 0.7; }
+  100% { top: 80px; opacity: 0; transform: rotate(360deg) scale(0.7); }
+}
+@keyframes fadeInSuccess {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes popIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  80% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); }
+}
+.file-label-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 1.2rem;
+}
+.file-label-group label {
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: #23401a;
+  margin-bottom: 0.4rem;
+  padding-left: 0.1rem;
+}
+.file-label-group input[type="file"] {
+  display: block;
+  width: 100%;
+  background: #fff;
+  border: 1.5px solid #23401a;
+  border-radius: 12px;
+  padding: 0.7rem 0.7rem;
+  font-size: 1.08rem;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+  box-shadow: none;
+}
+/* Remove floating label for file inputs */
+.floating-label-group input[type="file"] + label,
+.floating-label-group input[type="file"] {
+  display: none !important;
+}
+@media (max-width: 1100px) {
+  .reportform-card {
+    padding: 1.2rem 0.5rem;
+    max-width: 98vw;
+  }
+  .reportform-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .reportform-sidebar {
+    min-width: 100%;
+    max-width: 100%;
+    margin-bottom: 1.5rem;
+    align-items: center;
+  }
+  .reportform-main {
+    padding: 0;
+    width: 100%;
+    align-items: center;
+  }
+}
+@media (max-width: 700px) {
+  .reportform-sidebar {
+    padding: 1.2rem 0.5rem;
+    border-radius: 18px;
+  }
+  .reportform-main {
+    padding: 0.5rem 0;
+  }
+  .reportform-fields {
+    padding: 0 0.5rem;
+    max-width: 98vw;
+  }
+  .reportform-row {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+}
+@media (max-width: 600px) {
+  .reportform-success-card {
+    padding: 2rem 0.5rem;
+    min-height: 320px;
+    max-width: 98vw;
+  }
+  .success-title {
+    font-size: 1.3rem;
+  }
+  .success-circle {
+    width: 60px;
+    height: 60px;
+  }
+  .success-icon {
+    font-size: 2rem;
+  }
+} 

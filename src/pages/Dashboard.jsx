@@ -31,7 +31,7 @@ export default function Dashboard() {
               Empowering UMKM businesses to achieve their ESG goals with intelligent scoring and actionable insights
             </div>
             <div className="hero-cta">
-              <button className="cta-button primary">Get Your ESG Score</button>
+              <button className="cta-button primary" onClick={() => window.location.href = '/report'}>Get Your ESG Score</button>
               <button className="cta-button secondary">Learn More</button>
             </div>
           </div>
