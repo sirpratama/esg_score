@@ -8,10 +8,13 @@ import Rating from './pages/Rating';
 import Register from './pages/Register';
 import Contact from './pages/Contact';
 import Profile from './pages/Profile';
-import ReportForm from './pages/ReportForm';
-import Navbar from './components/Navbar'; // <-- Import Navbar
-import './App.css';
-import { supabase } from '../supabaseClient';
+import ReportForm  from './pages/ReportForm'
+import ESGResults from './pages/ESGResults'
+
+import './App.css'
+import { supabase } from '../supabaseClient'
+import { Import } from 'lucide-react'
+import Navbar from './components/Navbar';
 
 function App() {
   const [session, setSession] = useState(null);
@@ -37,8 +40,9 @@ function App() {
         <Route path="/rating" element={<Rating />} />
         <Route path="/register" element={<Register />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/report" element={<ReportForm />} />
+        <Route path ="/profile" element= {<Profile/>} /> 
+        <Route path = "/report" element = {<ReportForm/>} />
+        <Route path = "/esg-results" element = {<ESGResults/>} />
       </Routes>
     </Router>
   );
