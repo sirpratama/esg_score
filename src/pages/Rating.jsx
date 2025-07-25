@@ -165,36 +165,8 @@ export default function Rating() {
       }
     }
 
-  return (
-    <div style={{ width: "100vw", minHeight: "100vh", background: "#f7f7f7" }}>
-      
-      {/* Hero Section */}
-      <div style={{
-        width: '100vw',
-        height: '250px',
-        background: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${heroImg}) center/cover no-repeat`,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: '80px',
-      }}>
-        <div style={{ textAlign: 'center', color: '#fff', maxWidth: '800px', padding: '0 2rem' }}>
-          <h1 style={{
-            fontSize: '3rem',
-            fontWeight: 'bold',
-            marginBottom: '1rem',
-            textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
-          }}>ESG Business Ratings</h1>
-          <p style={{
-            fontSize: '1.2rem',
-            fontWeight: '500',
-            textShadow: '1px 1px 2px rgba(0,0,0,0.5)',
-            lineHeight: '1.6'
-          }}>
-            Discover sustainable Indonesian UMKM businesses leading the way in environmental responsibility, social impact, and good governance
-          </p>
-        </div>
-      </div>
+    return () => subscription.unsubscribe();
+  }, []);
 
   return (
     <div>
