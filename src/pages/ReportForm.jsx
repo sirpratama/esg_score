@@ -38,6 +38,7 @@ export default function ReportForm() {
   });
   const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
+  const [fileNames, setFileNames] = useState({});
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -45,6 +46,12 @@ export default function ReportForm() {
       ...prev,
       [name]: files ? files[0] : value,
     }));
+  };
+
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    setForm((prev) => ({ ...prev, [name]: files[0] }));
+    setFileNames((prev) => ({ ...prev, [name]: files[0] ? files[0].name : "" }));
   };
 
   const nextStep = () => setStep((s) => Math.min(s + 1, steps.length - 1));
@@ -160,13 +167,21 @@ export default function ReportForm() {
                     <div className="reportform-row">
                       <div className="file-label-group">
                         <label htmlFor="electricityBill">Electricity Bill</label>
-                        <input id="electricityBill" name="electricityBill" type="file" onChange={handleChange} className="reportform-input" />
+                        <div className="custom-file-input">
+                          <button type="button" onClick={() => document.getElementById('electricityBill').click()} className="file-btn">Upload File</button>
+                          <span className="file-name">{fileNames.electricityBill || "No file chosen"}</span>
+                          <input id="electricityBill" name="electricityBill" type="file" style={{ display: 'none' }} onChange={handleFileChange} />
+                        </div>
                       </div>
                     </div>
                     <div className="reportform-row">
                       <div className="file-label-group">
                         <label htmlFor="waterBill">Water Bill</label>
-                        <input id="waterBill" name="waterBill" type="file" onChange={handleChange} className="reportform-input" />
+                        <div className="custom-file-input">
+                          <button type="button" onClick={() => document.getElementById('waterBill').click()} className="file-btn">Upload File</button>
+                          <span className="file-name">{fileNames.waterBill || "No file chosen"}</span>
+                          <input id="waterBill" name="waterBill" type="file" style={{ display: 'none' }} onChange={handleFileChange} />
+                        </div>
                       </div>
                     </div>
                     <div className="reportform-row">
@@ -178,7 +193,11 @@ export default function ReportForm() {
                     <div className="reportform-row">
                       <div className="file-label-group wide">
                         <label htmlFor="transportBill">Transport Bill</label>
-                        <input id="transportBill" name="transportBill" type="file" onChange={handleChange} className="reportform-input" />
+                        <div className="custom-file-input">
+                          <button type="button" onClick={() => document.getElementById('transportBill').click()} className="file-btn">Upload File</button>
+                          <span className="file-name">{fileNames.transportBill || "No file chosen"}</span>
+                          <input id="transportBill" name="transportBill" type="file" style={{ display: 'none' }} onChange={handleFileChange} />
+                        </div>
                       </div>
                     </div>
                     <div className="reportform-actions">
@@ -193,17 +212,29 @@ export default function ReportForm() {
                     <div className="reportform-row">
                       <div className="file-label-group">
                         <label htmlFor="numEmployees">Number of Employees</label>
-                        <input id="numEmployees" name="numEmployees" type="file" onChange={handleChange} className="reportform-input" />
+                        <div className="custom-file-input">
+                          <button type="button" onClick={() => document.getElementById('numEmployees').click()} className="file-btn">Upload File</button>
+                          <span className="file-name">{fileNames.numEmployees || "No file chosen"}</span>
+                          <input id="numEmployees" name="numEmployees" type="file" style={{ display: 'none' }} onChange={handleFileChange} />
+                        </div>
                       </div>
                       <div className="file-label-group">
                         <label htmlFor="employeesHealth">Employees Health (BPJS/Insurance)</label>
-                        <input id="employeesHealth" name="employeesHealth" type="file" onChange={handleChange} className="reportform-input" />
+                        <div className="custom-file-input">
+                          <button type="button" onClick={() => document.getElementById('employeesHealth').click()} className="file-btn">Upload File</button>
+                          <span className="file-name">{fileNames.employeesHealth || "No file chosen"}</span>
+                          <input id="employeesHealth" name="employeesHealth" type="file" style={{ display: 'none' }} onChange={handleFileChange} />
+                        </div>
                       </div>
                     </div>
                     <div className="reportform-row">
                       <div className="file-label-group wide">
                         <label htmlFor="communityEngagement">Community Engagement</label>
-                        <input id="communityEngagement" name="communityEngagement" type="file" onChange={handleChange} className="reportform-input" />
+                        <div className="custom-file-input">
+                          <button type="button" onClick={() => document.getElementById('communityEngagement').click()} className="file-btn">Upload File</button>
+                          <span className="file-name">{fileNames.communityEngagement || "No file chosen"}</span>
+                          <input id="communityEngagement" name="communityEngagement" type="file" style={{ display: 'none' }} onChange={handleFileChange} />
+                        </div>
                       </div>
                     </div>
                     <div className="reportform-actions">
@@ -218,17 +249,29 @@ export default function ReportForm() {
                     <div className="reportform-row">
                       <div className="file-label-group">
                         <label htmlFor="ownershipStructure">Ownership Structure</label>
-                        <input id="ownershipStructure" name="ownershipStructure" type="file" onChange={handleChange} className="reportform-input" />
+                        <div className="custom-file-input">
+                          <button type="button" onClick={() => document.getElementById('ownershipStructure').click()} className="file-btn">Upload File</button>
+                          <span className="file-name">{fileNames.ownershipStructure || "No file chosen"}</span>
+                          <input id="ownershipStructure" name="ownershipStructure" type="file" style={{ display: 'none' }} onChange={handleFileChange} />
+                        </div>
                       </div>
                       <div className="file-label-group">
                         <label htmlFor="businessRegulation">Business Regulation</label>
-                        <input id="businessRegulation" name="businessRegulation" type="file" onChange={handleChange} className="reportform-input" />
+                        <div className="custom-file-input">
+                          <button type="button" onClick={() => document.getElementById('businessRegulation').click()} className="file-btn">Upload File</button>
+                          <span className="file-name">{fileNames.businessRegulation || "No file chosen"}</span>
+                          <input id="businessRegulation" name="businessRegulation" type="file" style={{ display: 'none' }} onChange={handleFileChange} />
+                        </div>
                       </div>
                     </div>
                     <div className="reportform-row">
                       <div className="file-label-group wide">
                         <label htmlFor="taxCompliance">Tax Compliance</label>
-                        <input id="taxCompliance" name="taxCompliance" type="file" onChange={handleChange} className="reportform-input" />
+                        <div className="custom-file-input">
+                          <button type="button" onClick={() => document.getElementById('taxCompliance').click()} className="file-btn">Upload File</button>
+                          <span className="file-name">{fileNames.taxCompliance || "No file chosen"}</span>
+                          <input id="taxCompliance" name="taxCompliance" type="file" style={{ display: 'none' }} onChange={handleFileChange} />
+                        </div>
                       </div>
                     </div>
                     <div className="reportform-actions">
