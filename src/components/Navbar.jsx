@@ -37,6 +37,7 @@ export default function Navbar({ session }) {
         <Link to="/about" className="italic">ABOUT</Link>
         <Link to="/service">SERVICE</Link>
         <Link to="/rating">RATING</Link>
+        {session && <Link to="/esg-results">MY RESULTS</Link>}
         <Link to="/contact" className="italic">CONTACT</Link>
         {!session ? (
           <>

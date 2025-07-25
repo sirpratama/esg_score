@@ -8,6 +8,7 @@ import Register from './pages/Register'
 import Contact from './pages/Contact'
 import Profile from './pages/Profile';
 import ReportForm  from './pages/ReportForm'
+import ESGResults from './pages/ESGResults'
 
 import './App.css'
 import { supabase } from '../supabaseClient'
@@ -26,6 +27,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path ="/profile" element= {<Profile/>} /> 
         <Route path = "/report" element = {<ReportForm/>} />
+        <Route path = "/esg-results" element = {<ESGResults/>} />
       </Routes>
     </Router>
   )
