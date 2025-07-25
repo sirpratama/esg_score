@@ -1,227 +1,301 @@
 import React, { useState } from "react";
 import { supabase } from "../../supabaseClient";
+import { useNavigate } from 'react-router-dom';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Chrome, Building2, Mail, Phone, Leaf, Eye, EyeOff } from "lucide-react";
 
 export default function Register() {
   const [businessName, setBusinessName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    // You can add phone/businessName to user metadata if needed
+    
+    if (password !== confirmPassword) {
+      alert("Passwords don't match!");
+      return;
+    }
+    
+    if (!agreedToTerms) {
+      alert("Please agree to the terms and conditions");
+      return;
+    }
+
+    setLoading(true);
     const { error } = await supabase.auth.signUp({
       email,
-      password: Math.random().toString(36).slice(-8) // Placeholder, you should add a password field for real use
+      password,
+      options: {
+        data: {
+          business_name: businessName,
+          phone: phone,
+        }
+      }
     });
+    
     if (error) {
       alert(error.message);
+    } else {
+      alert("Registration successful! Please check your email to verify your account.");
     }
+    setLoading(false);
+  };
+
+  const handleGoogleRegister = async () => {
+    setLoading(true);
+    await supabase.auth.signInWithOAuth({ provider: 'google' });
+    setLoading(false);
   };
 
   return (
-    <div style={{ display: 'flex', height: '100vh', width: '100vw' }}>
+    <div className="min-h-screen flex">
       {/* Left Section - Register Form */}
-      <div style={{
-        flex: 1,
-        background: '#fff',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: '0 4rem',
-        position: 'relative'
-      }}>
-        <div style={{
-          position: 'absolute',
-          top: '2rem',
-          left: '2rem',
-          color: '#bdbdbd',
-          fontSize: '0.9rem'
-        }}>
-          LoginPage
+      <div className="flex-1 flex items-center justify-center p-8 bg-white">
+        <div className="w-full max-w-md space-y-8">
+          {/* Logo/Brand */}
+          <div className="text-center">
+            <div className="flex items-center justify-center space-x-2 mb-4">
+              <Leaf className="h-8 w-8 text-green-600" />
+              <span className="text-2xl font-bold text-gray-900">ESGku</span>
+            </div>
+            <h1 className="text-3xl font-bold text-gray-900">Create Account</h1>
+            <p className="text-gray-600 mt-2">
+              Already have an account? {" "}
+              <button 
+                onClick={() => navigate('/login')}
+                className="text-green-600 hover:text-green-700 font-semibold"
+              >
+                Sign in here
+              </button>
+            </p>
+          </div>
+
+          {/* Register Form */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Sign Up</CardTitle>
+              <CardDescription>Create your ESG Score account to get started</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleRegister} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="businessName">Business Name</Label>
+                  <div className="relative">
+                    <Building2 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                    <Input
+                      id="businessName"
+                      type="text"
+                      placeholder="Enter your business name"
+                      value={businessName}
+                      onChange={(e) => setBusinessName(e.target.value)}
+                      className="pl-10"
+                      required
+                    />
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email Address</Label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="Enter your email address"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="pl-10"
+                      required
+                    />
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="phone">Phone Number</Label>
+                  <div className="relative">
+                    <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                    <Input
+                      id="phone"
+                      type="tel"
+                      placeholder="Enter your phone number"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      className="pl-10"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="password">Password</Label>
+                  <div className="relative">
+                    <Input
+                      id="password"
+                      type={showPassword ? "text" : "password"}
+                      placeholder="Create a password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      minLength={6}
+                    />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? (
+                        <EyeOff className="h-4 w-4 text-gray-400" />
+                      ) : (
+                        <Eye className="h-4 w-4 text-gray-400" />
+                      )}
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="confirmPassword">Confirm Password</Label>
+                  <div className="relative">
+                    <Input
+                      id="confirmPassword"
+                      type={showConfirmPassword ? "text" : "password"}
+                      placeholder="Confirm your password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      required
+                      minLength={6}
+                    />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    >
+                      {showConfirmPassword ? (
+                        <EyeOff className="h-4 w-4 text-gray-400" />
+                      ) : (
+                        <Eye className="h-4 w-4 text-gray-400" />
+                      )}
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-2">
+                  <input
+                    id="terms"
+                    type="checkbox"
+                    checked={agreedToTerms}
+                    onChange={(e) => setAgreedToTerms(e.target.checked)}
+                    className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                  />
+                  <Label htmlFor="terms" className="text-sm text-gray-700">
+                    I agree to the{" "}
+                    <span className="text-green-600 hover:text-green-700 cursor-pointer">
+                      Terms of Service
+                    </span>{" "}
+                    and{" "}
+                    <span className="text-green-600 hover:text-green-700 cursor-pointer">
+                      Privacy Policy
+                    </span>
+                  </Label>
+                </div>
+
+                <Button 
+                  type="submit" 
+                  className="w-full bg-green-600 hover:bg-green-700" 
+                  disabled={loading}
+                >
+                  {loading ? "Creating Account..." : "Create Account"}
+                </Button>
+              </form>
+
+              <div className="mt-6">
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <Separator className="w-full" />
+                  </div>
+                  <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-white px-2 text-gray-500">Or continue with</span>
+                  </div>
+                </div>
+
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full mt-4"
+                  onClick={handleGoogleRegister}
+                  disabled={loading}
+                >
+                  <Chrome className="mr-2 h-4 w-4" />
+                  Sign up with Google
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
-        <form onSubmit={handleRegister} style={{ width: '100%', maxWidth: 400, display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-          <h1 style={{ fontSize: '2.3rem', fontWeight: 'bold', color: '#111', marginBottom: '1rem', textAlign: 'center' }}>Sign Up</h1>
-          <input
-            type="text"
-            placeholder="Business Name"
-            value={businessName}
-            onChange={e => setBusinessName(e.target.value)}
-            style={{
-              padding: '1rem',
-              borderRadius: '16px',
-              border: '1.5px solid #23401a',
-              fontSize: '1rem',
-              outline: 'none',
-              background: '#fff',
-              color: '#23401a'
-            }}
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            style={{
-              padding: '1rem',
-              borderRadius: '16px',
-              border: '1.5px solid #23401a',
-              fontSize: '1rem',
-              outline: 'none',
-              background: '#fff',
-              color: '#23401a'
-            }}
-          />
-          <input
-            type="text"
-            placeholder="Phone Number"
-            value={phone}
-            onChange={e => setPhone(e.target.value)}
-            style={{
-              padding: '1rem',
-              borderRadius: '16px',
-              border: '1.5px solid #23401a',
-              fontSize: '1rem',
-              outline: 'none',
-              background: '#fff',
-              color: '#23401a'
-            }}
-          />
-          <button
-            type="submit"
-            style={{
-              background: '#23401a',
-              color: '#fff',
-              padding: '1rem',
-              borderRadius: '16px',
-              border: 'none',
-              fontSize: '1.1rem',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              marginTop: '1rem',
-              marginBottom: '0.5rem'
-            }}
-          >
-            Create an Account
-          </button>
-          <button
-            type="button"
-            onClick={async () => {
-              await supabase.auth.signInWithOAuth({ provider: 'google' });
-            }}
-            style={{
-              background: '#23401a',
-              color: '#fff',
-              padding: '1rem',
-              borderRadius: '16px',
-              border: 'none',
-              fontSize: '1.1rem',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '0.5rem'
-            }}
-          >
-            Sign In with GOOGLE
-            <svg width="28" height="28" viewBox="0 0 48 48" style={{ marginLeft: 8 }}><g><path fill="#4285F4" d="M24 9.5c3.54 0 6.7 1.22 9.19 3.23l6.85-6.85C35.64 2.36 30.18 0 24 0 14.82 0 6.71 5.82 2.69 14.09l7.98 6.19C12.13 13.13 17.57 9.5 24 9.5z"/><path fill="#34A853" d="M46.1 24.55c0-1.64-.15-3.22-.43-4.74H24v9.01h12.42c-.54 2.9-2.18 5.36-4.65 7.01l7.19 5.6C43.99 37.36 46.1 31.45 46.1 24.55z"/><path fill="#FBBC05" d="M9.67 28.28c-1.13-3.36-1.13-6.97 0-10.33l-7.98-6.19C-1.13 17.18-1.13 30.82 1.69 39.09l7.98-6.19z"/><path fill="#EA4335" d="M24 46c6.18 0 11.64-2.36 15.85-6.45l-7.19-5.6c-2.01 1.35-4.57 2.15-8.66 2.15-6.43 0-11.87-3.63-13.33-8.59l-7.98 6.19C6.71 42.18 14.82 48 24 48z"/></g></svg>
-          </button>
-        </form>
       </div>
+
       {/* Right Section - Illustration */}
-      <div style={{
-        flex: 1,
-        background: 'linear-gradient(135deg, #e3f3fc 0%, #d6f5e3 100%)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative',
-        overflow: 'hidden'
-      }}>
-        {/* Simple landscape illustration (reuse from Login) */}
-        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-          {/* Sky */}
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            height: '60%',
-            background: '#e3f3fc'
-          }} />
-          {/* Trees */}
-          <div style={{
-            position: 'absolute',
-            bottom: '40%',
-            left: '20%',
-            width: '20px',
-            height: '80px',
-            background: '#23401a'
-          }} />
-          <div style={{
-            position: 'absolute',
-            bottom: '45%',
-            left: '15%',
-            width: '30px',
-            height: '40px',
-            background: '#23401a',
-            borderRadius: '50% 50% 0 0'
-          }} />
-          <div style={{
-            position: 'absolute',
-            bottom: '40%',
-            left: '40%',
-            width: '20px',
-            height: '100px',
-            background: '#23401a'
-          }} />
-          <div style={{
-            position: 'absolute',
-            bottom: '45%',
-            left: '35%',
-            width: '30px',
-            height: '50px',
-            background: '#23401a',
-            borderRadius: '50% 50% 0 0'
-          }} />
-          <div style={{
-            position: 'absolute',
-            bottom: '40%',
-            right: '30%',
-            width: '25px',
-            height: '120px',
-            background: '#23401a'
-          }} />
-          <div style={{
-            position: 'absolute',
-            bottom: '45%',
-            right: '32%',
-            width: '40px',
-            height: '60px',
-            background: '#23401a',
-            borderRadius: '50% 50% 0 0'
-          }} />
-          {/* Ground */}
-          <div style={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: '40%',
-            background: 'linear-gradient(to top, #23401a, #4e7c4e)'
-          }} />
-          {/* Path */}
-          <div style={{
-            position: 'absolute',
-            bottom: '10%',
-            left: '50%',
-            width: '4px',
-            height: '30%',
-            background: '#23401a',
-            transform: 'translateX(-50%)',
-            borderRadius: '2px'
-          }} />
+      <div className="hidden lg:flex flex-1 items-center justify-center bg-gradient-to-br from-blue-100 via-green-50 to-blue-50">
+        <div className="relative w-full h-full max-w-lg">
+          {/* Modern Sustainability Illustration */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="relative w-80 h-80">
+              {/* Background Circle */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-200 to-green-200 rounded-full opacity-20"></div>
+              
+              {/* Sustainable Business Elements */}
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                {/* Central Building/Company Icon */}
+                <div className="relative">
+                  <div className="w-16 h-20 bg-green-600 rounded-lg mx-auto mb-4"></div>
+                  <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-8 h-2 bg-green-800 rounded"></div>
+                  <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-10 h-2 bg-green-800 rounded"></div>
+                  <div className="absolute top-10 left-1/2 transform -translate-x-1/2 w-8 h-2 bg-green-800 rounded"></div>
+                </div>
+
+                {/* Surrounding ESG Icons */}
+                <div className="absolute -top-16 -left-12 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                  <Leaf className="h-4 w-4 text-white" />
+                </div>
+                <div className="absolute -top-16 right-4 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                  <Building2 className="h-4 w-4 text-white" />
+                </div>
+                <div className="absolute top-8 -left-20 w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
+                  <Phone className="h-4 w-4 text-white" />
+                </div>
+                <div className="absolute top-8 -right-16 w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center">
+                  <Mail className="h-4 w-4 text-white" />
+                </div>
+              </div>
+
+              {/* Floating Particles */}
+              <div className="absolute top-20 left-20 w-3 h-3 bg-green-400 rounded-full opacity-70 animate-pulse"></div>
+              <div className="absolute top-32 right-16 w-2 h-2 bg-blue-400 rounded-full opacity-70 animate-pulse"></div>
+              <div className="absolute bottom-28 left-16 w-4 h-4 bg-purple-400 rounded-full opacity-70 animate-pulse"></div>
+              <div className="absolute bottom-36 right-20 w-3 h-3 bg-yellow-400 rounded-full opacity-70 animate-pulse"></div>
+
+              {/* ESG Text */}
+              <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 text-center">
+                <p className="text-lg font-semibold text-gray-700">Join the Future</p>
+                <p className="text-sm text-gray-600">Sustainable Business Practices</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
