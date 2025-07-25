@@ -414,6 +414,39 @@
 .floating-label-group input[type="file"] {
   display: none !important;
 }
+.custom-file-input {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.custom-file-input .file-btn {
+  background: #1c3a0e;
+  color: #fff;
+  font-weight: bold;
+  font-style: italic;
+  border-radius: 8px;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.custom-file-input .file-btn:hover {
+  background: #23401a;
+}
+.custom-file-input .file-name {
+  color: #23401a;
+  font-size: 1.05rem;
+  font-weight: 500;
+  font-style: italic;
+  opacity: 0.85;
+  background: #f7f7f7;
+  border: 1.5px solid #bdbd00;
+  border-radius: 8px;
+  padding: 0.45rem 1rem;
+  min-width: 120px;
+  display: inline-block;
+  text-align: left;
+}
 @media (max-width: 1100px) {
   .reportform-card {
     padding: 1.2rem 0.5rem;
