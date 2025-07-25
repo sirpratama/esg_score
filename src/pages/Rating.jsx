@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import bajuImg from "../assets/baju.png";
 import heroImg from "../assets/forest.jpeg";
+import { supabase } from "../../supabaseClient";
 
 // Enhanced business data with more details
 const items = [
@@ -140,10 +141,23 @@ function getScoreLabel(score) {
 }
 
 export default function Rating() {
+  const [session, setSession] = useState(null);
   const [search, setSearch] = useState("");
   const [activeTags, setActiveTags] = useState(["All"]);
   const [sortBy, setSortBy] = useState("score-desc");
   const [viewMode, setViewMode] = useState("grid"); // grid or list
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+    
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+    
+    return () => subscription.unsubscribe();
+  }, []);
 
   // Filter and sort logic
   const filtered = items
@@ -187,7 +201,7 @@ export default function Rating() {
 
   return (
     <div style={{ width: "100vw", minHeight: "100vh", background: "#f7f7f7" }}>
-      <Navbar />
+              <Navbar session={session} />
       
       {/* Hero Section */}
       <div style={{

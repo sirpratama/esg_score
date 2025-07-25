@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ReportForm.css";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "../../supabaseClient";
 
 const steps = [
   { label: "General" },
@@ -10,6 +11,8 @@ const steps = [
 ];
 
 export default function ReportForm() {
+  const [session, setSession] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [step, setStep] = useState(0);
   const [form, setForm] = useState({
     businessName: "",
@@ -39,6 +42,31 @@ export default function ReportForm() {
   const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // Check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!session) {
+        // Redirect to login if not authenticated
+        navigate('/login');
+        return;
+      }
+      setSession(session);
+      setLoading(false);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!session) {
+        navigate('/login');
+        return;
+      }
+      setSession(session);
+      setLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [navigate]);
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setForm((prev) => ({
@@ -57,6 +85,39 @@ export default function ReportForm() {
       navigate("/");
     }, 2000);
   };
+
+  // Show loading while checking authentication
+  if (loading) {
+    return (
+      <div className="reportform-bg">
+        <div className="reportform-card">
+          <div className="reportform-container" style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            height: '400px',
+            flexDirection: 'column',
+            gap: '1rem'
+          }}>
+            <div style={{ 
+              width: '40px', 
+              height: '40px', 
+              border: '4px solid #f0f0f0', 
+              borderTop: '4px solid #23401a', 
+              borderRadius: '50%', 
+              animation: 'spin 1s linear infinite' 
+            }}></div>
+            <p style={{ color: '#666', fontSize: '1.1rem' }}>Checking authentication...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Only render the form if user is authenticated
+  if (!session) {
+    return null; // This should not be reached due to redirect, but added for safety
+  }
 
   return (
     <div className="reportform-bg">

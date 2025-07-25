@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import heroImg from "../assets/forest.jpeg";
+import { supabase } from "../../supabaseClient";
 
 const contactMethods = [
   {
@@ -45,6 +46,7 @@ const faqs = [
 ];
 
 export default function Contact() {
+  const [session, setSession] = useState(null);
   const [form, setForm] = useState({ 
     name: '', 
     email: '', 
@@ -53,6 +55,18 @@ export default function Contact() {
     message: '',
     inquiryType: 'general'
   });
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+    
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+    
+    return () => subscription.unsubscribe();
+  }, []);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = e => {
@@ -71,7 +85,7 @@ export default function Contact() {
 
   return (
     <div style={{ width: '100vw', minHeight: '100vh', background: '#f7f7f7' }}>
-      <Navbar />
+      <Navbar session={session} />
       
       {/* Hero Section */}
       <div style={{
