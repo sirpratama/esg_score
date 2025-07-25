@@ -5,21 +5,27 @@ import { Link } from "react-router-dom";
 
 const teamMembers = [
   {
-    name: "Sarah Wijaya",
-    role: "CEO & Founder",
-    description: "Environmental engineer with 8+ years experience in sustainability consulting for Indonesian businesses.",
+    name: "Rafi",
+    role: "Team Lead",
+    description: "Universitas Indonesia Student",
     icon: "👩‍💼"
   },
   {
-    name: "Ahmad Rahman",
-    role: "CTO",
-    description: "AI specialist focused on developing innovative solutions for ESG assessment and environmental impact analysis.",
+    name: "Zahran",
+    role: "Front-end Developer",
+    description: "Universitas Indonesia Student",
     icon: "👨‍💻"
   },
   {
-    name: "Maya Sari",
-    role: "Head of UMKM Relations",
-    description: "Former small business owner who understands the unique challenges and opportunities facing Indonesian UMKM.",
+    name: "Sultan",
+    role: "UI/UX Designer",
+    description: "Universitas Indonesia Student",
+    icon: "🤝"
+  },
+  {
+    name: "Elision",
+    role: "UI/UX Designer",
+    description: "Universitas Indonesia Student",
     icon: "🤝"
   }
 ];
