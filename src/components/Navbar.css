@@ -92,8 +92,17 @@
   color: #142807;
 }
 
+.login-btn {
+  margin-left: 1.2 rem;
+  background-color: #fff;
+  color: #142807;
+  font-size: 5rem;
+}
+
 .signup-btn {
   margin-left: 1.2rem;
+  background: #fff;
+  color: #142807
 }
 
 .navbar-profile {
@@ -176,3 +185,66 @@
   background: #fff;
   color: #23401a;
 }
+
+.navbar-white {
+  background: #fff !important;
+  color: #23401a !important;
+  box-shadow: 0 2px 8px rgba(35,64,26,0.06);
+}
+.navbar-white .navbar-links a,
+.navbar-white .navbar-links .btn {
+  color: #23401a !important;
+  background: none !important;
+}
+.navbar-white .navbar-links a.active,
+.navbar-white .navbar-links a:hover {
+  background: #f7f7f7 !important;
+  color: #23401a !important;
+}
+.navbar-white .profile-avatar {
+  border: 2px solid #23401a;
+  background: #f7f7f7;
+}
+.navbar-white .profile-dropdown {
+  background: #fff;
+  color: #23401a;
+  box-shadow: 0 8px 32px rgba(35,64,26,0.10);
+}
+.navbar-white .profile-action {
+  color: #23401a;
+}
+.navbar-white .profile-action:hover, .navbar-white .profile-action:focus {
+  background: #b6e388;
+  color: #23401a;
+}
+.navbar-white .navbar-links .btn {
+  color: #23401a !important;
+  background: #fff !important;
+  border: 2px solid #23401a !important;
+  font-weight: 700;
+  box-shadow: none;
+}
+.navbar-white .navbar-links .btn:hover,
+.navbar-white .navbar-links .btn:focus {
+  background: #e6f2e6 !important;
+  color: #23401a !important;
+  border-color: #bdbd00 !important;
+}
+
+.navbar-links .btn {
+  background: #1c3a0e;
+  color: #fff;
+  font-weight: bold;
+  font-style: italic;
+  border-radius: 12px;
+  border: none;
+  box-shadow: none;
+  padding: 0.6rem 1.6rem;
+  transition: background 0.2s, color 0.2s;
+}
+.navbar-links .btn:hover,
+.navbar-links .btn:focus {
+  background: #23401a;
+  color: #fff;
+}
+

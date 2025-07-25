@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
 import "./Navbar.css";
 import { useState, useRef, useEffect } from "react";
@@ -7,6 +7,8 @@ import { useState, useRef, useEffect } from "react";
 export default function Navbar({ session }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const location = useLocation();
+  const isAuthPage = location.pathname === "/login" || location.pathname === "/register";
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -24,7 +26,7 @@ export default function Navbar({ session }) {
   }, []);
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar${isAuthPage ? " navbar-white" : ""}`}>
       <div className="navbar-logo">
         <Link to="/" style={{ textDecoration: 'none' }}>
           <img src="src/assets/logo.png" className="logo" style={{ width: '200px', height: 'auto' }}/>
