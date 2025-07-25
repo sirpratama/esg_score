@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const teamMembers = [
   {
-    name: "Rafi",
+    name: "Rafi Nazir",
     role: "Team Lead",
     description: "Universitas Indonesia Student",
     icon: "👩‍💼"
