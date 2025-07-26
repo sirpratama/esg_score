@@ -1,4 +1,4 @@
-# ESG Score - Sustainability Made Simple
+# ESGku - Sustainability Made Simple
 
 An intelligent ESG (Environmental, Social, Governance) scoring platform designed for UMKM (Usaha Mikro, Kecil, dan Menengah) businesses to assess and improve their sustainability performance.
 
